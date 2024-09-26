@@ -1,0 +1,36 @@
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: crud
+      POSTGRES_USER: microservice
+      POSTGRES_PASSWORD: microservice123
+    ports:
+      - "5432:5432"
+    networks:
+      - crud-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+    ports:
+      - "5672:5672"  # Porta de comunicação do RabbitMQ
+      - "15672:15672" # Porta do console de gerenciamento
+    networks:
+      - crud-network
+
+  crud-app:
+    build: .
+    ports:
+      - "8081:8080"
+    networks:
+      - crud-network
+    depends_on:
+      - postgres
+
+networks:
+  crud-network:
+    driver: bridge

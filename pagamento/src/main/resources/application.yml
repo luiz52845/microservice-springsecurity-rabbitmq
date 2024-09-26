@@ -1,0 +1,25 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/pagamento
+    username: microservice
+    password: microservice123
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+
+crud:
+  rabbitmq:
+    exchange: crud.exchange
+    queue: crud.produto.queue

@@ -1,0 +1,28 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: auth
+  datasource:
+    url: jdbc:postgresql://localhost:5432/auth #ou jdbc:postgresql://localhost:5432/crud para o dockercomponse
+    username: microservice
+    password: microservice123
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+
+security:
+  jwt:
+    token:
+      secret-key: RANDOM_GENERATED_BASE64_STRING_32_CHARACTERS_OR_MORE
+      expire-length: 360000
